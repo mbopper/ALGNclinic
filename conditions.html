@@ -165,11 +165,6 @@
       color: var(--ink); opacity: 0.55;
       margin-top: 1.5rem; max-width: 44ch;
     }
-    #condition-rotator {
-      display: inline-block;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-
     /* ─── Condition sections ─── */
     .condition-section {
       padding: 7rem 2rem 7rem 0.75rem;
@@ -298,8 +293,7 @@
 
   <!-- Page hero with rotating condition -->
   <header class="page-hero">
-    <h1 class="section-heading">We treat<br><span id="condition-rotator">sciatica</span>.</h1>
-    <p class="page-hero-sub">Evidence-based chiropractic and massage care for musculoskeletal conditions in Loughton, Essex.</p>
+    <h1 class="section-heading">We provide evidence-based care<br>for long-term results.</h1>
   </header>
 
   <!-- Sciatica -->
@@ -454,21 +448,6 @@
   </footer>
 
   <script>
-    // Rotating condition in hero
-    const conditions = ['lower back pain','upper back pain','neck pain','sciatica','whiplash','herniated discs','facet joint pain','postural dysfunction','tension headaches','cervicogenic headaches','shoulder pain','frozen shoulder','rotator cuff injuries','hip pain','knee pain','ankle sprains','Achilles tendonitis','tennis elbow',"golfer's elbow",'repetitive strain injury','sports injuries','muscle strains','ligament sprains','arthritis-related joint pain','post-surgical rehabilitation','mobility restrictions','nerve impingement','work-related desk pain','gym & training injuries','balance and movement issues'];
-    let idx = 0;
-    const rotator = document.getElementById('condition-rotator');
-    setInterval(() => {
-      rotator.style.opacity = '0';
-      rotator.style.transform = 'translateY(8px)';
-      setTimeout(() => {
-        idx = (idx + 1) % conditions.length;
-        rotator.textContent = conditions[idx];
-        rotator.style.opacity = '1';
-        rotator.style.transform = 'none';
-      }, 320);
-    }, 2400);
-
     // Nav
     const menuBtn = document.getElementById('menu-btn');
     const menuOverlay = document.getElementById('menu-overlay');

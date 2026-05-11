@@ -194,7 +194,7 @@
       padding: calc(45vh - 3rem) 2rem 0.75rem 0.75rem;
       background: var(--bg);
     }
-    .hero-image { line-height: 0; }
+    .hero-image { line-height: 0; overflow: hidden; }
     .hero-image img {
       width: 100%;
       display: block;
@@ -202,6 +202,11 @@
       object-fit: cover;
       object-position: center 25%;
       filter: brightness(0.88) contrast(1.06) saturate(0.8);
+      transform: scale(1.08) translateY(0px);
+      will-change: transform;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-image img { transform: none !important; }
     }
 
     /* ─── Shared heading ─── */
@@ -214,15 +219,22 @@
     }
     .section-heading--dark { color: var(--dark-ink); }
 
-    /* ─── About ─── */
-    .about-head { padding: 14rem 2rem 0.75rem 0.75rem; }
-    .about-head h2 { max-width: 22ch; }
-    .about-img-full { line-height: 0; }
-    .about-img-full img {
-      width: 100%;
-      display: block;
-      aspect-ratio: 3 / 2;
-      object-fit: cover;
+    /* ─── Home rotator ─── */
+    .home-rotator-block {
+      padding: 14rem 2rem 0.75rem 0.75rem;
+    }
+    .home-rotator-text {
+      font-size: clamp(2rem, 5.5vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      max-width: 22ch;
+      min-height: calc(clamp(2rem, 5.5vw, 3.5rem) * 2.4);
+    }
+    #home-condition-rotator {
+      display: inline-block;
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
     .about-desc { padding: 2.5rem 2rem 14rem; }
     .about-body {
@@ -435,7 +447,7 @@
       #menu-overlay { padding: 2rem 1.25rem; }
       .hero-label { padding: calc(45vh - 3rem) 1.25rem 0.75rem; }
       .hero-image img { aspect-ratio: 4 / 3; }
-      .about-head { padding: 16rem 1.25rem 0.75rem; }
+      .home-rotator-block { padding: 16rem 1.25rem 0.75rem; }
       .about-desc { padding: 4rem 1.25rem 9rem; }
       .services-section { padding: 3rem 1.25rem 10rem; }
       .approach-section { padding: 9rem 1.25rem 9rem; }
@@ -483,7 +495,7 @@
     </div>
     <div class="hero-image">
       <img
-        src="https://placehold.co/1920x1080/201E1B/201E1B"
+        src="https://placehold.co/1920x1080/E8E5E0/B8B4AE"
         alt=""
         role="presentation"
         width="1920"
@@ -495,20 +507,8 @@
 
   <!-- About -->
   <section id="about" aria-labelledby="about-heading">
-    <div class="about-head reveal reveal-each">
-      <h2 class="section-heading" id="about-heading">
-        We provide evidence-based care for long-term results.
-      </h2>
-    </div>
-
-    <div class="about-img-full">
-      <img
-        src="https://placehold.co/1920x1280/E0DDD8/C8C4BE?text="
-        alt="ALGN treatment room"
-        width="1920"
-        height="1280"
-        loading="lazy"
-      />
+    <div class="home-rotator-block">
+      <p class="home-rotator-text">We treat <span id="home-condition-rotator">sciatica</span>.</p>
     </div>
 
     <div class="about-desc">
@@ -526,7 +526,7 @@
       <h2 class="section-heading section-heading--dark services-h2" id="services-heading">
         We offer specialist care for movement, recovery and performance.
       </h2>
-      <a href="conditions.html" class="section-text-link section-text-link--dark">Musculoskeletal conditions we treat in Loughton, Essex <span aria-hidden="true">→</span></a>
+      <a href="conditions.html" class="section-text-link section-text-link--dark">See what conditions we treat <span aria-hidden="true">→</span></a>
     </div>
   </section>
 
@@ -538,7 +538,7 @@
           <h2 class="section-heading approach-lede" id="approach-heading">
             We focus on function, recovery and prevention.
           </h2>
-          <a href="about.html" class="section-text-link">Evidence-based chiropractic care at ALGN, Loughton <span aria-hidden="true">→</span></a>
+          <a href="about.html" class="section-text-link">See our approach <span aria-hidden="true">→</span></a>
         </div>
         <div class="approach-items">
           <div>
@@ -673,6 +673,35 @@
         });
       }
     });
+
+    // Parallax hero
+    const heroImgEl = document.querySelector('.hero-image img');
+    if (heroImgEl && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      let parallaxCurrent = 0, parallaxTarget = 0;
+      (function parallaxLoop() {
+        parallaxTarget = window.scrollY * 0.1;
+        parallaxCurrent += (parallaxTarget - parallaxCurrent) * 0.07;
+        heroImgEl.style.transform = 'scale(1.08) translateY(-' + parallaxCurrent.toFixed(2) + 'px)';
+        requestAnimationFrame(parallaxLoop);
+      })();
+    }
+
+    // Home condition rotator
+    const homeConditions = ['lower back pain','upper back pain','neck pain','sciatica','whiplash','herniated discs','facet joint pain','postural dysfunction','tension headaches','cervicogenic headaches','shoulder pain','frozen shoulder','rotator cuff injuries','hip pain','knee pain','ankle sprains','Achilles tendonitis','tennis elbow',"golfer's elbow",'repetitive strain injury','sports injuries','muscle strains','ligament sprains','arthritis-related joint pain','post-surgical rehabilitation','mobility restrictions','nerve impingement','work-related desk pain','gym & training injuries','balance and movement issues'];
+    const homeRotatorEl = document.getElementById('home-condition-rotator');
+    if (homeRotatorEl) {
+      let homeIdx = 0;
+      setInterval(() => {
+        homeRotatorEl.style.opacity = '0';
+        homeRotatorEl.style.transform = 'translateY(8px)';
+        setTimeout(() => {
+          homeIdx = (homeIdx + 1) % homeConditions.length;
+          homeRotatorEl.textContent = homeConditions[homeIdx];
+          homeRotatorEl.style.opacity = '1';
+          homeRotatorEl.style.transform = 'none';
+        }, 320);
+      }, 2400);
+    }
   </script>
 
 </body>
