@@ -236,7 +236,7 @@
       display: inline-block;
       transition: opacity 0.3s ease, transform 0.3s ease;
     }
-    .about-desc { padding: 2.5rem 2rem 14rem; }
+    .about-desc { padding: 2.5rem 2rem 14rem 0.75rem; }
     .about-body {
       font-size: 0.8125rem;
       line-height: 1.75;
@@ -308,15 +308,32 @@
       gap: 4rem;
       align-items: start;
     }
-    .location-img-full { line-height: 0; }
-    .location-img-full img {
+    .location-map { line-height: 0; }
+    .location-map iframe {
       width: 100%;
       display: block;
-      height: auto;
       aspect-ratio: 4 / 5;
-      object-fit: cover;
-      filter: saturate(0.75) contrast(0.95);
+      border: none;
+      filter: saturate(0.75) contrast(0.92);
     }
+
+    /* ─── About book btn ─── */
+    .about-book-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
+      font-size: 0.6875rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--dark-ink);
+      background: var(--ink);
+      text-decoration: none;
+      padding: 0.7rem 1.75rem;
+      transition: opacity 0.2s ease;
+    }
+    .about-book-btn:hover { opacity: 0.75; }
     .location-right { padding-top: 3rem; }
     .location-details { display: grid; grid-template-columns: 1fr; gap: 2rem; }
     .location-dt {
@@ -517,6 +534,9 @@
         <p>Our approach is guided by evidence, not habit. We take time to understand your movement patterns, history, and goals before any treatment begins.</p>
         <p>We measure outcomes, not sessions. Most patients see meaningful improvement within 4–6 visits. Our aim is always to make ourselves unnecessary.</p>
       </div>
+      <a href="https://algn.janeapp.co.uk" class="about-book-btn" target="_blank" rel="noopener noreferrer">
+        Book Now <span aria-hidden="true">→</span>
+      </a>
     </div>
   </section>
 
@@ -565,14 +585,13 @@
   <!-- Location -->
   <section class="location-section" id="location">
     <div class="location-inner">
-      <div class="location-img-full">
-        <img
-          src="https://placehold.co/1080x1350/D8D4CE/B8B4AE?text="
-          alt="ALGN Clinic — 236–238 High Road, Loughton"
-          width="1080"
-          height="1350"
+      <div class="location-map">
+        <iframe
+          src="https://maps.google.com/maps?q=236+High+Road+Loughton+IG10+1RB&t=&z=16&ie=UTF8&iwloc=&output=embed"
+          title="ALGN Clinic location"
           loading="lazy"
-        />
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
       </div>
       <div class="location-right">
         <div class="location-details">
