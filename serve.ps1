@@ -28,6 +28,17 @@ while ($listener.IsListening) {
   $path = $req.Url.LocalPath
   if ($path -eq '/') { $path = '/index.html' }
   $file = Join-Path $root $path.TrimStart('/')
+  # Extensionless clean URLs: try appending .html if no file found and no extension
+  if (-not (Test-Path $file -PathType Leaf) -and [System.IO.Path]::GetExtension($file) -eq '') {
+    $file = $file + '.html'
+  }
+  # Redirect /foo.html → /foo (mirrors Vercel behaviour locally)
+  if ($path -match '^(/[^.]+)\.html$') {
+    $res.StatusCode = 301
+    $res.RedirectLocation = $Matches[1]
+    $res.OutputStream.Close()
+    continue
+  }
   if (Test-Path $file -PathType Leaf) {
     $ext = [System.IO.Path]::GetExtension($file).ToLower()
     $ct = if ($mime[$ext]) { $mime[$ext] } else { 'application/octet-stream' }
