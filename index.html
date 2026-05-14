@@ -740,6 +740,50 @@
         }, 320);
       }, 2400);
     }
+
+    // Forced snap scroll — first two sections only
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var s = [document.getElementById('home'), document.getElementById('about')];
+      if (!s[0] || !s[1]) return;
+      var snapping = false;
+      var touchStartY = 0;
+
+      function snapTop(el) {
+        return Math.round(el.getBoundingClientRect().top + window.scrollY);
+      }
+
+      function snapTo(i) {
+        snapping = true;
+        window.scrollTo({ top: snapTop(s[i]), behavior: 'smooth' });
+        setTimeout(function () { snapping = false; }, 1000);
+      }
+
+      function handle(dir) {
+        var sy = window.scrollY;
+        var s0 = snapTop(s[0]);
+        var s1 = snapTop(s[1]);
+        if (dir > 0 && sy >= s0 - 10 && sy < s1 - 50) { snapTo(1); return true; }
+        if (dir < 0 && sy > s1 - 10 && sy < s1 + 100) { snapTo(0); return true; }
+        return false;
+      }
+
+      window.addEventListener('wheel', function (e) {
+        if (snapping) { e.preventDefault(); return; }
+        if (handle(e.deltaY > 0 ? 1 : -1)) e.preventDefault();
+      }, { passive: false });
+
+      window.addEventListener('touchstart', function (e) {
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      window.addEventListener('touchend', function (e) {
+        if (snapping) return;
+        var dy = touchStartY - e.changedTouches[0].clientY;
+        if (Math.abs(dy) < 40) return;
+        handle(dy > 0 ? 1 : -1);
+      }, { passive: true });
+    })();
   </script>
 
 </body>
