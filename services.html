@@ -98,6 +98,17 @@
     }
     body { background: var(--bg); overflow-x: hidden; }
 
+    /* ─── Banner ─── */
+    .site-banner {
+      background: var(--ink);
+      color: var(--dark-ink);
+      text-align: center;
+      padding: 0.65rem 2rem;
+      font-size: 0.625rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
     /* ─── Nav ─── */
     .nav-logo {
       position: fixed; top: 1.25rem; left: 2rem; z-index: 200;
@@ -279,6 +290,8 @@
   </style>
 </head>
 <body>
+
+  <div class="site-banner">Chiropractic services available to book from mid-July</div>
 
   <a href="index.html" class="nav-logo" aria-label="ALGN — home">ALGN</a>
   <button id="menu-btn" aria-label="Open navigation" aria-expanded="false" aria-controls="menu-overlay">
