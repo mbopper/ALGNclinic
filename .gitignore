@@ -1,3 +1,4 @@
 temporary screenshots/
 *.png
+!ALGN.png
 .claude/
