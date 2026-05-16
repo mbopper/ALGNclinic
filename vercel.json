@@ -1,5 +1,19 @@
 {
+  "headers": [
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        { "key": "Content-Type", "value": "application/xml; charset=utf-8" }
+      ]
+    }
+  ],
   "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "algnclinic.co.uk" }],
+      "destination": "https://www.algnclinic.co.uk/$1",
+      "permanent": true
+    },
     { "source": "/index.html", "destination": "/",           "permanent": true },
     { "source": "/about.html", "destination": "/about",      "permanent": true },
     { "source": "/services.html", "destination": "/services","permanent": true },
