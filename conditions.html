@@ -85,11 +85,13 @@
       src: url('/fonts/ABCDiatype-Regular.woff2') format('woff2');
     }
     :root {
-      --bg:      #FFFFFF;
-      --ink:     #0D0D0B;
-      --dark-bg: #0D0D0B;
-      --dark-ink:#F2F0EC;
-      --font: 'ABC Diatype', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --bg:       #FFFFFF;
+      --ink:      #0D0D0B;
+      --dark-bg:  #0D0D0B;
+      --dark-ink: #F2F0EC;
+      --font:     'ABC Diatype', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --banner-h: 2.2rem;
+      --header-h: 3.5rem;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html {
@@ -100,7 +102,7 @@
       color: var(--ink);
       scroll-behavior: smooth;
     }
-    body { background: var(--bg); overflow-x: hidden; }
+    body { background: var(--bg); overflow-x: hidden; padding-top: var(--banner-h); }
 
     /* ─── Banner ─── */
     .site-banner {
@@ -117,15 +119,16 @@
     }
 
     /* ─── Nav ─── */
+    .site-header-spacer { height: var(--header-h); background: #fff; }
     .nav-logo {
-      position: fixed; top: calc(2.25rem + 1.25rem); left: 2rem; z-index: 200;
-      font-size: 0.75rem; font-weight: 400; color: #fff;
+      position: fixed; top: calc(var(--banner-h) + 1.25rem); left: 2rem; z-index: 200;
+      font-size: 1rem; font-weight: 400; color: #fff;
       text-decoration: none; letter-spacing: 0.01em;
       mix-blend-mode: difference; transition: opacity 0.2s ease;
     }
     .nav-logo:hover { opacity: 0.5; }
     #menu-btn {
-      position: fixed; top: calc(2.25rem + 1.1rem); right: 2rem; z-index: 200;
+      position: fixed; top: calc(var(--banner-h) + 1.1rem); right: 2rem; z-index: 200;
       background: none; border: none; cursor: pointer;
       padding: 6px 0; display: flex; flex-direction: column; gap: 5px;
       mix-blend-mode: difference;
@@ -294,6 +297,8 @@
 <body>
 
   <div class="site-banner">Chiropractic services available to book from mid-July</div>
+
+  <div class="site-header-spacer"></div>
 
   <a href="/" class="nav-logo" aria-label="ALGN — home">ALGN</a>
   <button id="menu-btn" aria-label="Open navigation" aria-expanded="false" aria-controls="menu-overlay">

@@ -221,18 +221,18 @@
       object-fit: cover;
       object-position: center 25%;
       filter: brightness(0.62) contrast(1.06) saturate(0.8);
-      transform: scale(1.08) translateY(0px);
-      will-change: transform;
     }
     .hero-overlay {
       position: absolute;
-      bottom: 3.5rem;
-      left: 0.75rem;
+      top: 50%;
+      left: 2rem;
       right: 2rem;
+      transform: translateY(-50%);
     }
     .hero-overlay h1 {
       color: #fff !important;
-      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+      font-weight: 300;
       margin-bottom: 1.5rem;
     }
     .hero-book-btn {
@@ -250,9 +250,6 @@
       transition: opacity 0.2s ease;
     }
     .hero-book-btn:hover { opacity: 0.75; }
-    @media (prefers-reduced-motion: reduce) {
-      .hero-image img { transform: none !important; }
-    }
 
     /* ─── Shared heading ─── */
     .section-heading {
@@ -740,18 +737,6 @@
         });
       }
     });
-
-    // Parallax hero
-    const heroImgEl = document.querySelector('.hero-image img');
-    if (heroImgEl && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      let parallaxCurrent = 0, parallaxTarget = 0;
-      (function parallaxLoop() {
-        parallaxTarget = window.scrollY * 0.1;
-        parallaxCurrent += (parallaxTarget - parallaxCurrent) * 0.07;
-        heroImgEl.style.transform = 'scale(1.08) translateY(-' + parallaxCurrent.toFixed(2) + 'px)';
-        requestAnimationFrame(parallaxLoop);
-      })();
-    }
 
     // Home condition rotator
     const homeConditions = ['lower back pain','upper back pain','neck pain','sciatica','whiplash','herniated discs','facet joint pain','postural dysfunction','tension headaches','cervicogenic headaches','shoulder pain','frozen shoulder','rotator cuff injuries','hip pain','knee pain','ankle sprains','Achilles tendonitis','tennis elbow',"golfer's elbow",'repetitive strain injury','sports injuries','muscle strains','ligament sprains','arthritis-related joint pain','post-surgical rehabilitation','mobility restrictions','nerve impingement','work-related desk pain','gym & training injuries','balance and movement issues'];
