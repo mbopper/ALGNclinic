@@ -88,11 +88,13 @@
     }
 
     :root {
-      --bg:      #FFFFFF;
-      --ink:     #0D0D0B;
-      --dark-bg: #0D0D0B;
-      --dark-ink:#F2F0EC;
-      --font: 'ABC Diatype', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --bg:       #FFFFFF;
+      --ink:      #0D0D0B;
+      --dark-bg:  #0D0D0B;
+      --dark-ink: #F2F0EC;
+      --font:     'ABC Diatype', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --banner-h: 2.2rem;
+      --header-h: 3.5rem;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -123,27 +125,30 @@
     }
 
     /* ─── Nav ─── */
-    .nav-logo {
+    .site-header {
       position: fixed;
-      top: calc(2.25rem + 1.25rem);
-      left: 2rem;
+      top: var(--banner-h);
+      left: 0; right: 0;
       z-index: 200;
+      background: #fff;
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      border-bottom: 1px solid rgba(13,13,11,0.08);
+    }
+    .nav-logo {
       font-size: 0.75rem;
       font-weight: 400;
-      color: #fff;
+      color: var(--ink);
       text-decoration: none;
       letter-spacing: 0.01em;
-      mix-blend-mode: difference;
       transition: opacity 0.2s ease;
     }
     .nav-logo:hover { opacity: 0.5; }
 
     #menu-btn {
-      position: fixed;
-      top: calc(2.25rem + 1.1rem);
-      right: 2rem;
-      z-index: 200;
-
       background: none;
       border: none;
       cursor: pointer;
@@ -151,16 +156,16 @@
       display: flex;
       flex-direction: column;
       gap: 5px;
-      mix-blend-mode: difference;
     }
     #menu-btn span {
       display: block;
       width: 22px;
       height: 1px;
-      background: #fff;
-      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease;
+      background: var(--ink);
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease, background 0.2s ease;
       transform-origin: center;
     }
+    #menu-btn[aria-expanded="true"] span { background: var(--dark-ink); }
     #menu-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
     #menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
     #menu-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
@@ -208,11 +213,12 @@
     }
 
     /* ─── Hero ─── */
+    #home { margin-top: calc(var(--banner-h) + var(--header-h)); }
     .hero-image { position: relative; line-height: 0; overflow: hidden; }
     .hero-image img {
       width: 100%;
       display: block;
-      height: 100svh;
+      height: calc(100svh - var(--banner-h) - var(--header-h));
       object-fit: cover;
       object-position: center 25%;
       filter: brightness(0.72) contrast(1.06) saturate(0.8);
@@ -225,7 +231,11 @@
       left: 0.75rem;
       right: 2rem;
     }
-    .hero-heading { color: #F2F0EC; margin-bottom: 1.5rem; }
+    .hero-heading {
+      color: #fff;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      margin-bottom: 1.5rem;
+    }
     .hero-book-btn {
       display: inline-flex;
       align-items: center;
@@ -495,10 +505,9 @@
 
     /* ─── Responsive ─── */
     @media (max-width: 900px) {
-      .nav-logo { left: 1.25rem; }
-      #menu-btn { right: 1.25rem; }
+      .site-header { padding: 0 1.25rem; }
       #menu-overlay { padding: 2rem 1.25rem; }
-      .hero-image img { height: 100svh; }
+      .hero-image img { height: calc(100svh - var(--banner-h) - var(--header-h)); }
       .home-rotator-block { padding: 16rem 1.25rem 0.75rem; }
       .about-desc { padding: 4rem 1.25rem 9rem; }
       .services-section { padding: 3rem 1.25rem 10rem; }
@@ -527,10 +536,12 @@
 
   <div id="intro"><span>ALGN</span></div>
 
-  <a href="/" class="nav-logo" aria-label="ALGN — home">ALGN</a>
-  <button id="menu-btn" aria-label="Open navigation" aria-expanded="false" aria-controls="menu-overlay">
-    <span></span><span></span><span></span>
-  </button>
+  <header class="site-header">
+    <a href="/" class="nav-logo" aria-label="ALGN — home">ALGN</a>
+    <button id="menu-btn" aria-label="Open navigation" aria-expanded="false" aria-controls="menu-overlay">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
   <div id="menu-overlay" role="dialog" aria-modal="true" aria-label="Navigation">
     <nav aria-label="Main navigation">
       <a href="/" class="menu-link">Home</a>
