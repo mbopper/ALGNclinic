@@ -269,7 +269,8 @@
       letter-spacing: -0.03em;
       color: var(--ink);
       max-width: 22ch;
-      min-height: calc(clamp(2rem, 5.5vw, 3.5rem) * 2.4);
+      height: calc(clamp(2rem, 5.5vw, 3.5rem) * 3.6);
+      overflow: hidden;
     }
     #home-condition-rotator {
       display: inline-block;
@@ -501,8 +502,9 @@
       .nav-logo { left: 1.25rem; }
       #menu-btn { right: 1.25rem; }
       #menu-overlay { padding: 2rem 1.25rem; }
-      .hero-image img { height: 55svh; object-position: center center; }
-      .home-rotator-block { padding: 4rem 1.25rem 0.75rem; }
+      #home { margin-top: 3rem; }
+      .hero-image img { height: calc(100svh - var(--banner-h) - var(--header-h) - 3rem); object-position: center center; }
+      .home-rotator-block { padding: 16rem 1.25rem 0.75rem; }
       .about-desc { padding: 4rem 1.25rem 9rem; }
       .services-section { padding: 3rem 1.25rem 10rem; }
       .approach-section { padding: 9rem 1.25rem 9rem; }
