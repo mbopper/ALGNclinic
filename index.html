@@ -208,21 +208,39 @@
     }
 
     /* ─── Hero ─── */
-    .hero-label {
-      padding: calc(45vh - 3rem) 2rem 0.75rem 0.75rem;
-      background: var(--bg);
-    }
-    .hero-image { line-height: 0; overflow: hidden; }
+    .hero-image { position: relative; line-height: 0; overflow: hidden; }
     .hero-image img {
       width: 100%;
       display: block;
-      aspect-ratio: 16 / 9;
+      height: 100svh;
       object-fit: cover;
       object-position: center 25%;
-      filter: brightness(0.88) contrast(1.06) saturate(0.8);
+      filter: brightness(0.72) contrast(1.06) saturate(0.8);
       transform: scale(1.08) translateY(0px);
       will-change: transform;
     }
+    .hero-overlay {
+      position: absolute;
+      bottom: 3.5rem;
+      left: 0.75rem;
+      right: 2rem;
+    }
+    .hero-heading { color: #F2F0EC; margin-bottom: 1.5rem; }
+    .hero-book-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.6875rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: var(--dark-ink);
+      text-decoration: none;
+      padding: 0.7rem 1.75rem;
+      transition: opacity 0.2s ease;
+    }
+    .hero-book-btn:hover { opacity: 0.75; }
     @media (prefers-reduced-motion: reduce) {
       .hero-image img { transform: none !important; }
     }
@@ -480,8 +498,7 @@
       .nav-logo { left: 1.25rem; }
       #menu-btn { right: 1.25rem; }
       #menu-overlay { padding: 2rem 1.25rem; }
-      .hero-label { padding: calc(45vh - 3rem) 1.25rem 0.75rem; }
-      .hero-image img { aspect-ratio: 4 / 3; }
+      .hero-image img { height: 100svh; }
       .home-rotator-block { padding: 16rem 1.25rem 0.75rem; }
       .about-desc { padding: 4rem 1.25rem 9rem; }
       .services-section { padding: 3rem 1.25rem 10rem; }
@@ -527,9 +544,6 @@
 
   <!-- Hero -->
   <div id="home">
-    <div class="hero-label">
-      <h1 class="section-heading">More than just a clinic.</h1>
-    </div>
     <div class="hero-image">
       <img
         src="/ALGN.png"
@@ -537,6 +551,10 @@
         role="presentation"
         loading="eager"
       />
+      <div class="hero-overlay">
+        <h1 class="section-heading hero-heading">More than just a clinic.</h1>
+        <a href="/book" class="hero-book-btn">Book Now <span aria-hidden="true">→</span></a>
+      </div>
     </div>
   </div>
 
@@ -552,8 +570,8 @@
         <p>Our approach is guided by evidence, not habit. We take time to understand your movement patterns, history, and goals before any treatment begins.</p>
         <p>We measure outcomes, not sessions. Most patients see meaningful improvement within 4–6 visits. Our aim is always to make ourselves unnecessary.</p>
       </div>
-      <a href="/book" class="about-book-btn">
-        Book Now <span aria-hidden="true">→</span>
+      <a href="/conditions" class="about-book-btn">
+        See conditions we treat <span aria-hidden="true">→</span>
       </a>
     </div>
   </section>
@@ -564,7 +582,7 @@
       <h2 class="section-heading section-heading--dark services-h2" id="services-heading">
         We offer specialist care for movement, recovery and performance.
       </h2>
-      <a href="/conditions" class="section-text-link section-text-link--dark">See what conditions we treat <span aria-hidden="true">→</span></a>
+      <a href="/services" class="section-text-link section-text-link--dark">Explore our services <span aria-hidden="true">→</span></a>
     </div>
   </section>
 
