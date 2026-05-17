@@ -108,7 +108,7 @@
       scroll-behavior: smooth;
     }
 
-    body { background: var(--bg); overflow-x: hidden; }
+    body { background: var(--bg); overflow-x: hidden; padding-top: var(--banner-h); }
 
     /* ─── Banner ─── */
     .site-banner {
@@ -125,26 +125,25 @@
     }
 
     /* ─── Nav ─── */
+    .site-header {
+      background: #fff;
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+    }
     .nav-logo {
-      position: fixed;
-      top: calc(var(--banner-h) + 1.25rem);
-      left: 2rem;
-      z-index: 200;
       font-size: 1rem;
       font-weight: 400;
-      color: #fff;
+      color: var(--ink);
       text-decoration: none;
       letter-spacing: 0.01em;
-      mix-blend-mode: difference;
       transition: opacity 0.2s ease;
     }
     .nav-logo:hover { opacity: 0.5; }
 
     #menu-btn {
-      position: fixed;
-      top: calc(var(--banner-h) + 1.1rem);
-      right: 2rem;
-      z-index: 200;
       background: none;
       border: none;
       cursor: pointer;
@@ -152,13 +151,12 @@
       display: flex;
       flex-direction: column;
       gap: 5px;
-      mix-blend-mode: difference;
     }
     #menu-btn span {
       display: block;
       width: 22px;
       height: 1px;
-      background: #fff;
+      background: var(--ink);
       transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease;
       transform-origin: center;
     }
@@ -213,7 +211,7 @@
     .hero-image img {
       width: 100%;
       display: block;
-      height: 100svh;
+      height: calc(100svh - var(--banner-h) - var(--header-h));
       object-fit: cover;
       object-position: center 25%;
       filter: brightness(0.62) contrast(1.06) saturate(0.8);
@@ -500,10 +498,9 @@
 
     /* ─── Responsive ─── */
     @media (max-width: 900px) {
-      .nav-logo { left: 1.25rem; }
-      #menu-btn { right: 1.25rem; }
+      .site-header { padding: 0 1.25rem; }
       #menu-overlay { padding: 2rem 1.25rem; }
-      .hero-image img { height: 100svh; }
+      .hero-image img { height: calc(100svh - var(--banner-h) - var(--header-h)); }
       .home-rotator-block { padding: 16rem 1.25rem 0.75rem; }
       .about-desc { padding: 4rem 1.25rem 9rem; }
       .services-section { padding: 3rem 1.25rem 10rem; }
@@ -532,10 +529,12 @@
 
   <div id="intro"><span>ALGN</span></div>
 
-  <a href="/" class="nav-logo" aria-label="ALGN — home">ALGN</a>
-  <button id="menu-btn" aria-label="Open navigation" aria-expanded="false" aria-controls="menu-overlay">
-    <span></span><span></span><span></span>
-  </button>
+  <header class="site-header">
+    <a href="/" class="nav-logo" aria-label="ALGN — home">ALGN</a>
+    <button id="menu-btn" aria-label="Open navigation" aria-expanded="false" aria-controls="menu-overlay">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
   <div id="menu-overlay" role="dialog" aria-modal="true" aria-label="Navigation">
     <nav aria-label="Main navigation">
       <a href="/" class="menu-link">Home</a>
@@ -557,7 +556,7 @@
         loading="eager"
       />
       <div class="hero-overlay">
-        <h1 class="section-heading hero-heading">More than just a clinic.</h1>
+        <h1 class="section-heading hero-heading">Evidence-based care.<br>Long-term results.</h1>
         <a href="/book" class="hero-book-btn">Book Now <span aria-hidden="true">→</span></a>
       </div>
     </div>
