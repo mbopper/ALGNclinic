@@ -125,25 +125,30 @@
     }
 
     /* ─── Nav ─── */
-    .site-header {
-      background: #fff;
+    .site-header-spacer {
       height: var(--header-h);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 2rem;
+      background: #fff;
     }
     .nav-logo {
+      position: fixed;
+      top: calc(var(--banner-h) + 1.25rem);
+      left: 2rem;
+      z-index: 200;
       font-size: 1rem;
       font-weight: 400;
-      color: var(--ink);
+      color: #fff;
       text-decoration: none;
       letter-spacing: 0.01em;
+      mix-blend-mode: difference;
       transition: opacity 0.2s ease;
     }
     .nav-logo:hover { opacity: 0.5; }
 
     #menu-btn {
+      position: fixed;
+      top: calc(var(--banner-h) + 1.1rem);
+      right: 2rem;
+      z-index: 200;
       background: none;
       border: none;
       cursor: pointer;
@@ -151,12 +156,13 @@
       display: flex;
       flex-direction: column;
       gap: 5px;
+      mix-blend-mode: difference;
     }
     #menu-btn span {
       display: block;
       width: 22px;
       height: 1px;
-      background: var(--ink);
+      background: #fff;
       transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease;
       transform-origin: center;
     }
@@ -224,8 +230,8 @@
       left: 0.75rem;
       right: 2rem;
     }
-    .hero-heading {
-      color: #fff;
+    .hero-overlay h1 {
+      color: #fff !important;
       font-size: clamp(3rem, 7vw, 5.5rem);
       margin-bottom: 1.5rem;
     }
@@ -498,7 +504,8 @@
 
     /* ─── Responsive ─── */
     @media (max-width: 900px) {
-      .site-header { padding: 0 1.25rem; }
+      .nav-logo { left: 1.25rem; }
+      #menu-btn { right: 1.25rem; }
       #menu-overlay { padding: 2rem 1.25rem; }
       .hero-image img { height: calc(100svh - var(--banner-h) - var(--header-h)); }
       .home-rotator-block { padding: 16rem 1.25rem 0.75rem; }
@@ -529,12 +536,12 @@
 
   <div id="intro"><span>ALGN</span></div>
 
-  <header class="site-header">
-    <a href="/" class="nav-logo" aria-label="ALGN — home">ALGN</a>
-    <button id="menu-btn" aria-label="Open navigation" aria-expanded="false" aria-controls="menu-overlay">
-      <span></span><span></span><span></span>
-    </button>
-  </header>
+  <div class="site-header-spacer"></div>
+
+  <a href="/" class="nav-logo" aria-label="ALGN — home">ALGN</a>
+  <button id="menu-btn" aria-label="Open navigation" aria-expanded="false" aria-controls="menu-overlay">
+    <span></span><span></span><span></span>
+  </button>
   <div id="menu-overlay" role="dialog" aria-modal="true" aria-label="Navigation">
     <nav aria-label="Main navigation">
       <a href="/" class="menu-link">Home</a>
